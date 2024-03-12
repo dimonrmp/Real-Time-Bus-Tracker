@@ -136,7 +136,7 @@
 											status: ${location.attributes.current_status}
 										</li>
 										<li>
-											stop station: ${stops.find(s => s.id === location.relationships.stop.data.id).attributes.name}		
+											stop station: ${stops.find(s => s.id === location.relationships.stop.data?.id)?.attributes.name || ""}	
 										</li>
 									</ul>					
 								</p>`
