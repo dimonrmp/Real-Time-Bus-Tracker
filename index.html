@@ -63,12 +63,14 @@
 			container: 'map',
 			style: 'mapbox://styles/mapbox/streets-v11',
 			center: [-71.104, 42.351],
-			zoom: 13
+			zoom: 12
 		});
 
 		var markers = [];
 		var route = null;
 		var stops = null;
+		var selectedRoute = "";
+		var routeTracking;
 
 		async function populateTheDropDownListOfRoutes() {
 			let routes = [];
@@ -95,14 +97,28 @@
 
 		}
 
+		function startTracking() {
+			setInterval(refreshLocations, 15000)
+		};
+
 		async function getNewRoute(routeId) {
 			if (routeId === "none") return;
 			// get bus data    
-			route = await getRouteDetails(routeId);
-			startTracking();
+			selectedRoute = routeId;
+			route = await getRouteDetails();
+
+			if (routeTracking) {
+				clearInterval(routeTracking);
+				routeTracking = null;
+			}
+
+			if (!routeTracking) {
+				refreshLocations();
+				routeTracking = setInterval(refreshLocations, 15000);
+			}
 		}
 
-		async function startTracking() {
+		async function refreshLocations() {
 			const locations = await getBusLocations();
 
 			markers.forEach(marker => {
@@ -124,7 +140,7 @@
 											status: ${location.attributes.current_status}
 										</li>
 										<li>
-											stop station: ${stops.filter(s => s.id === location.relationships.stop.data.id)[0].attributes.name}		
+											stop station: ${stops.find(s => s.id === location.relationships.stop.data.id).attributes.name}		
 										</li>
 									</ul>					
 								</p>`
@@ -134,19 +150,20 @@
 				markers.push(marker);
 			});
 
-			setTimeout(startTracking, 15000);
+			// routeTracking();
 		}
 
 		// Request bus data from MBTA
 		async function getBusLocations() {
-			const url = 'https://api-v3.mbta.com/vehicles?filter[route]=1&include=trip';
+			if (!selectedRoute) return [];
+			const url = `https://api-v3.mbta.com/vehicles?filter[route]=${selectedRoute}&include=trip`;
 			const response = await fetch(url);
 			const json = await response.json();
 			return json.data;
 		}
 
-		async function getRouteDetails(routeId) {
-			const url = 'https://api-v3.mbta.com/routes/' + routeId;
+		async function getRouteDetails() {
+			const url = 'https://api-v3.mbta.com/routes/' + selectedRoute;
 			const response = await fetch(url);
 			const json = await response.json();
 			return json.data;
@@ -159,8 +176,10 @@
 			stops = json.data;
 		}
 
+
 		populateTheDropDownListOfRoutes();
 		getStopDetails();
+		// startTracking();
 
 	</script>
 
