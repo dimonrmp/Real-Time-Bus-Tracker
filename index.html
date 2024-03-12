@@ -97,10 +97,6 @@
 
 		}
 
-		function startTracking() {
-			setInterval(refreshLocations, 15000)
-		};
-
 		async function getNewRoute(routeId) {
 			if (routeId === "none") return;
 			// get bus data    
@@ -179,7 +175,6 @@
 
 		populateTheDropDownListOfRoutes();
 		getStopDetails();
-		// startTracking();
 
 	</script>
 
