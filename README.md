@@ -3,6 +3,12 @@
 
 ## Real-time locations of MBTA's transportation
 
+### Description of the project
+
+The project teaches how to work with Mapbox mapping library to pull in data asynchronously and display map elements.
+It is also illustrates how to use MBTA API to source real-time data of the Boston MBTA buses and how to use mapping libraries to display 
+the live location of the busses on a map. 
+ 
 
 ### How to Run
 - Sign up for an account with Mapbox and generate your own API key
