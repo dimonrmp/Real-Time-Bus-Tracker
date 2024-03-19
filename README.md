@@ -4,8 +4,11 @@
 
 ### How to Run
 - Sign up for an account with Mapbox and generate your own API key
-- Replace YOUR_MAPBOX_API_KEY text with your API key in index.html
+- Replace YOUR_MAPBOX_API_KEY text with your API key in mapanimation.js
 - Load index.html in a browser
+- Once the pages is loaded, select the route to track from the drop-down list located in the left upper corner
+- The locations of the vehicles (buses or trains) are refreshed every 15 seconds
+
 
 ### Improvements made so far
 
