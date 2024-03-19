@@ -1,6 +1,8 @@
 # Real Time Bus Tracker
 
+
 ## Real-time locations of MBTA's transportation
+
 
 ### How to Run
 - Sign up for an account with Mapbox and generate your own API key
@@ -14,6 +16,11 @@
 
 - Created a dropdown list allowing to select any available MBTA's route to track
 - Added popup to the markers showing the route name, status and stop station related of the tracked vehicle
+
+
+### Roadmap of future improvements
+Curently I do not plan any further activities in this repository. 
+
 
 ### License
 MIT License
