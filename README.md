@@ -27,6 +27,8 @@ the live location of the busses on a map.
 ### Roadmap of future improvements
 Curently I do not plan any further activities in this repository. 
 
+### Demo
+Click [here](https://dimonrmp.github.io/projects/real-time-bus-tracker/realtimebustracker.html) to see and check the demo of the project 
 
 ### License
 MIT License
